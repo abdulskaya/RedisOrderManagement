@@ -7,7 +7,6 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 export class OrderService {
   constructor(@Inject('CACHE_MANAGER') private cacheManager: Cache) { }
 
-
   async setOrders() {
     await this.cacheManager.set('key1', 'hello');
   }

@@ -1,6 +1,9 @@
 # compiled output
 /dist
 /node_modules
+.env
+.vscode
+package-lock.json
 
 # Logs
 logs
