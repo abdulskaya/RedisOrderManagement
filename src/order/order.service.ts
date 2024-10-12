@@ -1,7 +1,5 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { faker } from '@faker-js/faker';
 const moment = require("moment");
@@ -37,7 +35,7 @@ export class OrderService implements OnModuleInit {
         index += 1;
       }
       const endTime = Date.now();
-      console.log(`Sipariş getirme işlemi ${(endTime - startTime) / 1000} saniyede tamamlandı.`);
+      console.log(`Sipariş getirme işlemi ${(endTime - startTime) / 1000} saniyede tamamlandı (Redis: ${process.env.REDIS_ACTIVE ? 'aktif' : 'pasif'})`);
     }
   }
 
@@ -54,7 +52,7 @@ export class OrderService implements OnModuleInit {
       const orders: Partial<Order>[] = [];
       const orderPrefix = 'HB';
 
-      for (let i = 0; i < 250; i++) {
+      for (let i = 0; i < 10000; i++) {
         const randomNumber = faker.number.int({ min: 100000, max: 999999 }); // 6 haneli rastgele sayı
         let order = {
           orderNumber: `${orderPrefix}-${randomNumber}`,
